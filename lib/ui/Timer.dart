@@ -5,11 +5,13 @@ import 'package:studybuddy/bloc/timer_bloc/timer_bloc.dart';
 import 'package:studybuddy/models/Ticker.dart';
 
 class TimerContainer extends StatelessWidget {
+  //TODO: sistemare grafica complessiva
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
+        //TODO: definire altezza responsive
         height: 300,
         width: 300,
         decoration: BoxDecoration(
@@ -37,6 +39,7 @@ class _TimerState extends State<Timer> {
       children: [
         BlocBuilder<TimerBloc, TimerState>(
           builder: (context, state) {
+            //TODO: aggiungere ore(?)
             final String minutesStr =
                 ((state.duration / 60) % 60).floor().toString().padLeft(2, '0');
             final String secondsStr =
