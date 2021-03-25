@@ -21,7 +21,7 @@ Type: Web App
 
 ## Tasks:
 
-- [ ]  Scegliere backend
+- [X]  Scegliere backend
 - [ ]  Aggiungere funzioni
 - [ ]  Studiare API Spotify
 - [ ]  Disegnare grafica

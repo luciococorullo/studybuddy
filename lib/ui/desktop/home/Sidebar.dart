@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Logo.dart';
-import '../../LogoutButton.dart';
+import '../../shared/Logo.dart';
+import '../../shared/LogoutButton.dart';
 import 'ProfilePreview.dart';
 
 class Sidebar extends StatelessWidget {
@@ -21,7 +21,6 @@ class Sidebar extends StatelessWidget {
           Spacer(flex: 1),
           ProfilePreview(),
           Spacer(flex: 1),
-          //TODO: centrare questi elementi
           SidebarItem(title: "Profile", icon: Icons.person),
           SidebarItem(title: "Stats", icon: Icons.bar_chart),
           SidebarItem(title: "Settings", icon: Icons.settings),

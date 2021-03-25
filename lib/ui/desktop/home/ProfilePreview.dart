@@ -36,7 +36,6 @@ class StatsBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         //TODO: definire size
-        //height: 50,
         width: 70,
         padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(left: 10),
@@ -52,7 +51,7 @@ class StatsBox extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                       textStyle: TextStyle(color: Colors.white, fontSize: 12))),
-              Text("$stat",
+              Text(stat.toString(),
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                       textStyle: TextStyle(color: Colors.white, fontSize: 18)))
