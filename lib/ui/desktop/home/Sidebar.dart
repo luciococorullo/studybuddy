@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:studybuddy/ui/shared/InfoVersion.dart';
 
 import '../../shared/Logo.dart';
 import '../../shared/LogoutButton.dart';
@@ -28,6 +29,7 @@ class Sidebar extends StatelessWidget {
             flex: 10,
           ),
           LogoutButton(),
+          InfoVersion(version: 0.1),
           //TODO: inserire info sulla versione (?)
         ],
       ),

@@ -62,7 +62,7 @@ class StatsBox extends StatelessWidget {
 List<Widget> _generateStats() {
   return [
     StatsBox(name: "Time", stat: 125.3),
-    StatsBox(name: "Tasks", stat: 12),
+    StatsBox(name: "Position", stat: 5),
     StatsBox(name: "Days", stat: 10)
   ];
 }
