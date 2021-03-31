@@ -18,6 +18,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   void initState() {
     super.initState();
     ws = new WeatherFactory(key);
+    //TODO: metterie qui il fetch del meteo
+    //queryWeather();
   }
 
   @override
@@ -25,12 +27,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     return Align(
       alignment: Alignment.topRight,
       child: Container(height: 200, width: 350, child: _resultView()),
-      /* Column(
-            children: <Widget>[
-              Expanded(child: _resultView()),
-              _buttons(),
-            ],
-          ), */
     );
   }
 
@@ -93,14 +89,21 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   }
 
   Widget weatherIcon(String condition) {
+    //TODO: implementare iconcine decenti
     switch (condition) {
       case "Clouds":
         return Icon(Icons.cloud);
         break;
-      case "Sunny":
+      case "Wind":
+        return Text("vento");
+        break;
+      case "Clear":
         return Icon(Icons.wb_sunny);
       case "Rain":
         return Text("pioggia");
+      case "Clouds":
+        return Text("neve");
+        break;
       default:
         return Text("?");
     }

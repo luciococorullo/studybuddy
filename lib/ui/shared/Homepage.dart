@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studybuddy/ui/desktop/home/NotesBoard.dart';
 import 'package:studybuddy/ui/desktop/home/WeatherWidget.dart';
 import 'package:studybuddy/ui/phone/PhoneHomepage.dart';
 import 'package:studybuddy/shared/ResponsiveView.dart';
@@ -26,10 +27,15 @@ class DesktopHomepage extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height,
           //TODO: fix larghezza
-          width: 900,
+          width: 1000,
           padding: const EdgeInsets.all(10.0),
           child: Stack(
-            children: [WelcomeBanner(), TimerContainer(), WeatherWidget()],
+            children: [
+              WelcomeBanner(),
+              TimerContainer(),
+              WeatherWidget(),
+              NotesBoard()
+            ],
           ),
         ),
       ],
