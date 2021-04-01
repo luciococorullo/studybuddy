@@ -8,6 +8,7 @@ class NotesBoard extends StatelessWidget {
     Note(title: "prova2", description: "Nota2 di prova", state: Type.DOING),
     Note(title: "prova3", description: "Nota3 di prova", state: Type.DOING),
     Note(title: "prova4", description: "Nota4 di prova", state: Type.DOING),
+    Note(title: "prova5", description: "Nota5 di prova", state: Type.DONE),
   ];
 
   @override

@@ -35,7 +35,7 @@ class _NoteCardState extends State<NoteCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.note.state.toString()),
+              getType(widget.note.state),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
@@ -54,4 +54,35 @@ class _NoteCardState extends State<NoteCard> {
       ),
     );
   }
+}
+
+Widget getType(Type type) {
+  String state;
+  Color color;
+
+  switch (type) {
+    case Type.DOING:
+      state = "Doing";
+      color = Colors.orange;
+      break;
+    case Type.DONE:
+      state = "Done";
+      color = Colors.green;
+      break;
+    case Type.TODO:
+      state = "Todo";
+      color = Colors.red;
+      break;
+  }
+  return Container(
+    height: 20,
+    width: 70,
+    decoration:
+        BoxDecoration(color: color, borderRadius: BorderRadius.circular(50)),
+    child: Text(
+      state,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.white)),
+    ),
+  );
 }
