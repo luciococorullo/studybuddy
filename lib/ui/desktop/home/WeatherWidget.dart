@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:studybuddy/shared/costants.dart';
 import 'package:weather/weather.dart';
 
 enum AppState { NOT_DOWNLOADED, DOWNLOADING, FINISHED_DOWNLOADING }
@@ -24,9 +26,14 @@ class _WeatherWidgetState extends State<WeatherWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Container(height: 200, width: 350, child: _resultView()),
+    //queryWeather();
+    return Container(
+      //TODO: definire size dinamico
+      height: 100,
+      width: 300,
+      child: _resultView(),
+      decoration:
+          BoxDecoration(color: glass, borderRadius: BorderRadius.circular(10)),
     );
   }
 
@@ -49,8 +56,18 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       itemCount: _data.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(_data[index].areaName),
-          subtitle: Text(_data[index].temperature.toString()),
+          title: Text(_data[index].areaName,
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ))),
+          subtitle: Text(_data[index].temperature.toString(),
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ))),
           trailing: _fetchButton(),
           leading: weatherIcon(_data[index].weatherMain),
         );
@@ -59,31 +76,32 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   }
 
   Widget contentDownloading() {
-    return Container(
-        margin: EdgeInsets.all(25),
-        child: Column(children: [
-          Text(
-            'Fetching Weather...',
-            style: TextStyle(fontSize: 20),
-          ),
-          Container(
-              margin: EdgeInsets.only(top: 50),
-              child: Center(child: CircularProgressIndicator(strokeWidth: 10)))
-        ]));
+    return ListTile(
+      title: Text(
+        'Fetching Weather...',
+        style: TextStyle(fontSize: 20),
+      ),
+    );
   }
 
   Widget contentNotDownloaded() {
     return ListTile(
-      title: Text(
-        'Press the button to download the Weather forecast',
-      ),
+      title: Text('Press the button to download the Weather forecast',
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ))),
       trailing: _fetchButton(),
     );
   }
 
   Widget _fetchButton() {
     return IconButton(
-      icon: Icon(Icons.refresh_rounded),
+      icon: Icon(
+        Icons.refresh_rounded,
+        color: Colors.white,
+      ),
       onPressed: queryWeather,
     );
   }
@@ -92,13 +110,19 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     //TODO: implementare iconcine decenti
     switch (condition) {
       case "Clouds":
-        return Icon(Icons.cloud);
+        return Icon(
+          Icons.cloud,
+          color: Colors.white,
+        );
         break;
       case "Wind":
         return Text("vento");
         break;
       case "Clear":
-        return Icon(Icons.wb_sunny);
+        return Icon(
+          Icons.wb_sunny,
+          color: Colors.white,
+        );
       case "Rain":
         return Text("pioggia");
       case "Clouds":

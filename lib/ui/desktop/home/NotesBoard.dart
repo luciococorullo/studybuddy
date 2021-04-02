@@ -14,14 +14,13 @@ class NotesBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.topLeft,
         child: Container(
             height: 700,
             width: 700,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.red,
-            ),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.transparent),
             child: GridView.custom(
               //TODO: quante note per colonna?
               gridDelegate:

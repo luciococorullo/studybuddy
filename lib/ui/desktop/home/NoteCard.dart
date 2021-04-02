@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/models/Note.dart';
+import 'package:studybuddy/shared/costants.dart';
 
 class NoteCard extends StatefulWidget {
   Note note;
@@ -15,8 +16,8 @@ class _NoteCardState extends State<NoteCard> {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.white),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(10), color: glass),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

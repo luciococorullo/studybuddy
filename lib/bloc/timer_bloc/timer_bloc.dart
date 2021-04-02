@@ -9,7 +9,7 @@ part 'timer_state.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Ticker _ticker;
-  static const int _duration = 1500;
+  static int _duration = 1500;
 
   StreamSubscription<int> _tickerSubscription;
 
@@ -39,6 +39,11 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     } else if (event is TimerTicked) {
       yield* _mapTimerTickedToState(event);
     }
+  }
+
+  void setDuration(int seconds) {
+    _duration = seconds;
+    print("duration is now $seconds");
   }
 
   @override
