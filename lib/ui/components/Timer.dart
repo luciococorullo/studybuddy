@@ -5,10 +5,11 @@ import 'package:studybuddy/bloc/timer_bloc/timer_bloc.dart';
 import 'package:studybuddy/models/Ticker.dart';
 import 'package:studybuddy/shared/costants.dart';
 
-//enum Status { POMODORO, BREAK, CUSTOM }
+bool pom = true;
 
 class TimerContainer extends StatelessWidget {
   //TODO: sistemare grafica complessiva
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +19,8 @@ class TimerContainer extends StatelessWidget {
       decoration:
           BoxDecoration(color: glass, borderRadius: BorderRadius.circular(10)),
       child: BlocProvider(
-        create: (context) => TimerBloc(ticker: Ticker()),
+        create: (context) =>
+            TimerBloc(ticker: Ticker(), duration: pom ? 1500 : 300),
         child: Timer(),
       ),
     );
@@ -44,6 +46,7 @@ class _TimerState extends State<Timer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             BlocBuilder<TimerBloc, TimerState>(
+              //TimerBloc timer;
               builder: (context, state) {
                 final String minutesStr = ((state.duration / 60) % 60)
                     .floor()
@@ -145,8 +148,6 @@ class Actions extends StatelessWidget {
 }
 
 class Buttons extends StatefulWidget {
-  Buttons({Key key}) : super(key: key);
-
   @override
   _ButtonsState createState() => _ButtonsState();
 }
@@ -157,10 +158,19 @@ class _ButtonsState extends State<Buttons> {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10),
       child: Row(
-        //crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Spacer(
+            flex: 2,
+          ),
           TextButton(
-            onPressed: () => print("pressed"),
+            onPressed: () {
+              print("Pomodoro pressed");
+              setState(() {
+                pom = true;
+              });
+            },
             child: Text("Pomodoro",
                 style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
@@ -168,9 +178,16 @@ class _ButtonsState extends State<Buttons> {
                         fontSize: 18,
                         decoration: TextDecoration.underline))),
           ),
-          Spacer(),
+          Spacer(
+            flex: 1,
+          ),
           TextButton(
-            onPressed: () => print("pressed"),
+            onPressed: () {
+              print("Break pressed");
+              setState(() {
+                pom = false;
+              });
+            },
             child: Text("Break",
                 style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
@@ -178,15 +195,9 @@ class _ButtonsState extends State<Buttons> {
                         fontSize: 18,
                         decoration: TextDecoration.underline))),
           ),
-          Spacer(),
-          TextButton(
-              onPressed: () => print("pressed"),
-              child: Text("Custom",
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                          color: Colors.black45,
-                          fontSize: 18,
-                          decoration: TextDecoration.underline))))
+          Spacer(
+            flex: 2,
+          )
         ],
       ),
     );

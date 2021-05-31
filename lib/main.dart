@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
       title: 'Study Buddy',
       home: Homepage(),
     );

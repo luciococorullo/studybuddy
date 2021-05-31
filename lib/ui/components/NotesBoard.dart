@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studybuddy/models/Note.dart';
-import 'package:studybuddy/ui/desktop/home/NoteCard.dart';
+import 'package:studybuddy/ui/components/NoteCard.dart';
 
 class NotesBoard extends StatelessWidget {
   List<Note> listNote = [

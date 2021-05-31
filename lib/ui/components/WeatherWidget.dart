@@ -20,8 +20,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   void initState() {
     super.initState();
     ws = new WeatherFactory(key);
-    //TODO: metterie qui il fetch del meteo
-    //queryWeather();
+    //TODO: metterie qui il fetch del meteo?
   }
 
   @override
@@ -86,13 +85,20 @@ class _WeatherWidgetState extends State<WeatherWidget> {
 
   Widget contentNotDownloaded() {
     return ListTile(
-      title: Text('Press the button to download the Weather forecast',
+      title: Text("Naples",
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ))),
+      subtitle: Text("18.5 Celsius",
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
             color: Colors.white,
             fontSize: 15,
           ))),
       trailing: _fetchButton(),
+      leading: weatherIcon("Clear"),
     );
   }
 

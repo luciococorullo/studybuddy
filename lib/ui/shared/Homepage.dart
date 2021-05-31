@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studybuddy/ui/desktop/home/NotesBoard.dart';
-import 'package:studybuddy/ui/desktop/home/Wallpaper.dart';
+import 'package:studybuddy/ui/components/NotesBoard.dart';
+import 'package:studybuddy/ui/components/Wallpaper.dart';
 import 'package:studybuddy/ui/phone/PhoneHomepage.dart';
 import 'package:studybuddy/shared/ResponsiveView.dart';
-import '../desktop/home/Sidebar.dart';
+import '../components/Sidebar.dart';
 
 class Homepage extends StatelessWidget {
   @override

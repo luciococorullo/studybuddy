@@ -9,14 +9,15 @@ part 'timer_state.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Ticker _ticker;
-  static int _duration = 1500;
+  static int duration;
 
   StreamSubscription<int> _tickerSubscription;
 
-  TimerBloc({@required Ticker ticker})
+  TimerBloc({@required Ticker ticker, @required duration})
       : assert(ticker != null),
         _ticker = ticker,
-        super(TimerInitial(_duration));
+        //_duration = duration,
+        super(TimerInitial(duration));
 
   @override
   void onTransition(Transition<TimerEvent, TimerState> transition) {
@@ -42,8 +43,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   void setDuration(int seconds) {
-    _duration = seconds;
-    print("duration is now $seconds");
+    duration = seconds;
   }
 
   @override
@@ -76,7 +76,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   Stream<TimerState> _mapTimerResetToState(TimerReset reset) async* {
     _tickerSubscription?.cancel();
-    yield TimerInitial(_duration);
+    yield TimerInitial(duration);
   }
 
   Stream<TimerState> _mapTimerTickedToState(TimerTicked tick) async* {
