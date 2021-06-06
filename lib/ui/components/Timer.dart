@@ -5,8 +5,6 @@ import 'package:studybuddy/bloc/timer_bloc/timer_bloc.dart';
 import 'package:studybuddy/models/Ticker.dart';
 import 'package:studybuddy/shared/costants.dart';
 
-bool pom = true;
-
 class TimerContainer extends StatelessWidget {
   //TODO: sistemare grafica complessiva
 
@@ -14,13 +12,13 @@ class TimerContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //TODO: definire size responsive
+      padding: EdgeInsets.all(10),
       height: 150,
       width: 300,
       decoration:
           BoxDecoration(color: glass, borderRadius: BorderRadius.circular(10)),
       child: BlocProvider(
-        create: (context) =>
-            TimerBloc(ticker: Ticker(), duration: pom ? 1500 : 300),
+        create: (context) => TimerBloc(ticker: Ticker()),
         child: Timer(),
       ),
     );
@@ -38,9 +36,15 @@ class _TimerState extends State<Timer> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Spacer(
-          flex: 1,
+        Text(
+          "Timer Pomodoro",
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+            color: Colors.black45,
+            fontSize: 18,
+          )),
         ),
+        Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,9 +76,8 @@ class _TimerState extends State<Timer> {
           ],
         ),
         Spacer(
-          flex: 1,
-        ),
-        Buttons()
+          flex: 2,
+        )
       ],
     );
   }
@@ -146,7 +149,7 @@ class Actions extends StatelessWidget {
     return [];
   }
 }
-
+/* 
 class Buttons extends StatefulWidget {
   @override
   _ButtonsState createState() => _ButtonsState();
@@ -203,3 +206,4 @@ class _ButtonsState extends State<Buttons> {
     );
   }
 }
+ */
