@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studybuddy/shared/costants.dart';
 import 'package:video_player/video_player.dart';
 
 class Wallpaper extends StatefulWidget {
@@ -40,57 +41,51 @@ class _WallpaperState extends State<Wallpaper> {
                 aspectRatio: _controller.value.aspectRatio,
                 child: VideoPlayer(_controller),
               ),
-              /* VideoProgressIndicator(
-                _controller,
-                allowScrubbing: true,
-                padding: EdgeInsets.all(10),
-              ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(_controller.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow),
-                    onPressed: () {
-                      setState(() {
-                        _controller.value.isPlaying
-                            ? _controller.pause()
-                            : _controller.play();
-                      });
-                    },
-                  ),
-                  Text(
-                      '${convertToMinutesSeconds(videoPosition)} / ${convertToMinutesSeconds(videoLength)}'),
-                  SizedBox(width: 10),
-                  Icon(animatedVolumeIcon(volume)),
-                  Slider(
-                    value: volume,
-                    min: 0,
-                    max: 1,
-                    onChanged: (_volume) => setState(() {
-                      volume = _volume;
-                      _controller.setVolume(_volume);
-                    }),
-                  ),
-                  Spacer(),
-                  IconButton(
-                      icon: Icon(
-                        Icons.loop,
-                        color: _controller.value.isLooping
-                            ? Colors.green
-                            : Colors.black,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _controller.setLooping(!_controller.value.isLooping);
-                        });
-                      }),
-                ],
-              ) */
             ],
           ],
         ),
       ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Spacer(
+            flex: 4,
+          ),
+          FloatingActionButton.extended(
+            backgroundColor: primary,
+            label: Text(_controller.value.isPlaying ? "Pause" : "Play"),
+            icon: Icon(
+                _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
+            onPressed: () {
+              setState(() {
+                _controller.value.isPlaying
+                    ? _controller.pause()
+                    : _controller.play();
+              });
+            },
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          FloatingActionButton(
+            backgroundColor: primary,
+            child: Icon(_controller.value.volume > 0
+                ? Icons.volume_up
+                : Icons.volume_off),
+            onPressed: () {
+              setState(() {
+                _controller.value.volume > 0
+                    ? _controller.setVolume(0.0)
+                    : _controller.setVolume(50.0);
+              });
+            },
+          ),
+          Spacer(
+            flex: 2,
+          )
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 
