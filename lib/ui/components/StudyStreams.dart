@@ -60,8 +60,8 @@ class RoomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      width: 100,
+      height: 80,
+      width: 90,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: primary),
       child: Center(

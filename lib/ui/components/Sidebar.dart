@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/shared/costants.dart';
+import 'package:studybuddy/ui/components/Profile.dart';
 import 'package:studybuddy/ui/components/StudyStreams.dart';
 import 'package:studybuddy/ui/components/WeatherWidget.dart';
 import 'package:studybuddy/ui/components/InfoVersion.dart';
@@ -27,9 +27,11 @@ class Sidebar extends StatelessWidget {
           children: [
             Logo(),
             Spacer(flex: 1),
-            TimerContainer(),
+            Profile(),
             Spacer(flex: 1),
             WeatherWidget(),
+            Spacer(flex: 1),
+            TimerContainer(),
             Spacer(flex: 1),
             StudyStreams(),
             //TODO: agg widgets

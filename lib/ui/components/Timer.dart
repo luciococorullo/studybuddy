@@ -11,7 +11,6 @@ class TimerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //TODO: definire size responsive
       padding: EdgeInsets.all(10),
       height: 150,
       width: 300,

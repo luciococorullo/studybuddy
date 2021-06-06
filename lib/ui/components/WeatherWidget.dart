@@ -55,16 +55,18 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       itemCount: _data.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(_data[index].areaName,
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ))),
+          title: Text(
+            _data[index].areaName,
+            style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+              color: Colors.black45,
+              fontSize: 18,
+            )),
+          ),
           subtitle: Text(_data[index].temperature.toString(),
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
-                color: Colors.white,
+                color: Colors.black45,
                 fontSize: 15,
               ))),
           trailing: _fetchButton(),
@@ -78,7 +80,11 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     return ListTile(
       title: Text(
         'Fetching Weather...',
-        style: TextStyle(fontSize: 20),
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+          color: Colors.black45,
+          fontSize: 18,
+        )),
       ),
     );
   }
@@ -88,13 +94,13 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       title: Text("Naples",
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-            color: Colors.white,
+            color: Colors.black45,
             fontSize: 18,
           ))),
-      subtitle: Text("18.5 Celsius",
+      subtitle: Text("20.5 Celsius",
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-            color: Colors.white,
+            color: Colors.black45,
             fontSize: 15,
           ))),
       trailing: _fetchButton(),
@@ -106,7 +112,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     return IconButton(
       icon: Icon(
         Icons.refresh_rounded,
-        color: Colors.white,
+        color: Colors.black45,
       ),
       onPressed: queryWeather,
     );

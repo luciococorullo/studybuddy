@@ -31,7 +31,7 @@ class _WallpaperState extends State<Wallpaper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: secondary,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -76,7 +76,7 @@ class _WallpaperState extends State<Wallpaper> {
               setState(() {
                 _controller.value.volume > 0
                     ? _controller.setVolume(0.0)
-                    : _controller.setVolume(50.0);
+                    : _controller.setVolume(0.5);
               });
             },
           ),
