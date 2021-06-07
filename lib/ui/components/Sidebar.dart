@@ -6,6 +6,7 @@ import 'package:studybuddy/ui/components/WeatherWidget.dart';
 import 'package:studybuddy/ui/components/InfoVersion.dart';
 import 'package:studybuddy/ui/components/Timer.dart';
 
+import 'LoginButton.dart';
 import 'Logo.dart';
 import 'LogoutButton.dart';
 
@@ -38,6 +39,7 @@ class Sidebar extends StatelessWidget {
             Spacer(
               flex: 10,
             ),
+            LoginButton(),
             LogoutButton(),
             InfoVersion(version: 0.1),
           ],
