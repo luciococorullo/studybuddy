@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -126,4 +127,22 @@ void signOutGoogle() async {
   imageUrl = null;
 
   print("User signed out of Google account");
+}
+
+Future getUser() async {
+  // Initialize Firebase
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool authSignedIn = prefs.getBool('auth') ?? false;
+
+  final User user = auth.currentUser;
+
+  if (authSignedIn == true) {
+    if (user != null) {
+      uid = user.uid;
+      name = user.displayName;
+      userEmail = user.email;
+      imageUrl = user.photoURL;
+    }
+  }
 }

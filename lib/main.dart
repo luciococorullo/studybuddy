@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'models/auth.dart';
 import 'ui/pages/Homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -17,6 +18,18 @@ class _AppState extends State<App> {
   /// The future is part of the state of our widget. We should not call `initializeApp`
   /// directly inside [build].
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  // invoca la funzione getUserInfo da auth e ricorda le credenziali
+  Future getUserInfo() async {
+    await getUser();
+    setState(() {});
+    print(uid);
+  }
+
+  @override
+  void initState() {
+    getUserInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
