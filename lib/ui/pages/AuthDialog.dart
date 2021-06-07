@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/models/auth.dart';
+import 'package:studybuddy/shared/costants.dart';
 import 'package:studybuddy/ui/components/GoogleButton.dart';
 
 import 'Homepage.dart';
@@ -67,7 +69,7 @@ class _AuthDialogState extends State<AuthDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -76,22 +78,20 @@ class _AuthDialogState extends State<AuthDialog> {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             width: 400,
-            color: Theme.of(context).backgroundColor,
+            color: primary,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Center(
-                  child: Text(
-                    'EXPLORE',
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.headline1.color,
-                      fontSize: 24,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 3,
-                    ),
-                  ),
+                  child: Text('StudyBuddy',
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          letterSpacing: 2,
+                        ),
+                      )),
                 ),
                 SizedBox(height: 30),
                 Padding(
@@ -100,14 +100,13 @@ class _AuthDialogState extends State<AuthDialog> {
                     bottom: 8,
                   ),
                   child: Text(
-                    'Email address',
+                    'Email',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.subtitle2.color,
-                      fontSize: 18,
-                      // fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
-                      // letterSpacing: 3,
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
@@ -166,11 +165,11 @@ class _AuthDialogState extends State<AuthDialog> {
                   child: Text(
                     'Password',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.subtitle2.color,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      // letterSpacing: 3,
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
@@ -361,7 +360,7 @@ class _AuthDialogState extends State<AuthDialog> {
                                 _isRegistering = false;
                               });
                             },
-                            child: Padding(
+                            child: Container(
                               padding: EdgeInsets.only(
                                 top: 15.0,
                                 bottom: 15.0,
@@ -401,7 +400,7 @@ class _AuthDialogState extends State<AuthDialog> {
                           child: Text(
                             loginStatus,
                             style: TextStyle(
-                              color: loginStringColor,
+                              color: secondary,
                               fontSize: 14,
                               // letterSpacing: 3,
                             ),
@@ -414,10 +413,11 @@ class _AuthDialogState extends State<AuthDialog> {
                     left: 40.0,
                     right: 40.0,
                   ),
+                  //separatore prima del login con google
                   child: Container(
                     height: 1,
                     width: double.maxFinite,
-                    color: Colors.blueGrey[200],
+                    color: secondary,
                   ),
                 ),
                 SizedBox(height: 30),
@@ -429,7 +429,7 @@ class _AuthDialogState extends State<AuthDialog> {
                     'By proceeding, you agree to our Terms of Use and confirm you have read our Privacy Policy.',
                     maxLines: 2,
                     style: TextStyle(
-                      color: Theme.of(context).textTheme.subtitle2.color,
+                      color: Colors.black45,
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
                       // letterSpacing: 3,

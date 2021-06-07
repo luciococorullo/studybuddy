@@ -7,7 +7,8 @@ class Logo extends StatelessWidget {
     return Text(
       "StudyBuddy",
       style: GoogleFonts.montserrat(
-        textStyle: TextStyle(color: Colors.white, fontSize: 36),
+        textStyle:
+            TextStyle(color: Colors.white, fontSize: 36, letterSpacing: 2),
       ),
       textAlign: TextAlign.left,
     );

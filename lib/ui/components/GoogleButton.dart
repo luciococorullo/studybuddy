@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/models/auth.dart';
+import 'package:studybuddy/shared/costants.dart';
 import 'package:studybuddy/ui/pages/Homepage.dart';
 
 class GoogleButton extends StatefulWidget {
@@ -16,7 +18,7 @@ class _GoogleButtonState extends State<GoogleButton> {
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: Colors.blueGrey, width: 3),
+          //side: BorderSide(color: Colors.yellow, width: 2),
         ),
         color: Colors.white,
       ),
@@ -56,24 +58,26 @@ class _GoogleButtonState extends State<GoogleButton> {
           child: _isProcessing
               ? CircularProgressIndicator(
                   valueColor: new AlwaysStoppedAnimation<Color>(
-                    Colors.blueGrey,
+                    secondary,
                   ),
                 )
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image(
-                      image: AssetImage("assets/images/google_logo.png"),
-                      height: 30.0,
+                    Image.asset(
+                      'assets/images/google_logo.png',
+                      height: 30,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
                         'Continue with Google',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.blueGrey,
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black45,
+                          ),
                         ),
                       ),
                     )
