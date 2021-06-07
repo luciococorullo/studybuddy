@@ -27,6 +27,7 @@ dependencies:
   cached_network_image: ^2.5.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.0
+  firebase_core: ^1.2.1
   flutter_bloc: ^7.0.0
   google_fonts: ^1.0.0
   video_player: ^2.1.4
