@@ -27,7 +27,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   Widget build(BuildContext context) {
     //queryWeather();
     return Container(
-      //TODO: definire size dinamico
       height: 100,
       width: 300,
       child: _resultView(),
@@ -63,7 +62,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               fontSize: 18,
             )),
           ),
-          subtitle: Text(_data[index].temperature.toString(),
+          subtitle: Text(_data[index].temperature.toString().split("e").first,
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                 color: Colors.black45,
@@ -77,16 +76,10 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   }
 
   Widget contentDownloading() {
-    return ListTile(
-      title: Text(
-        'Fetching Weather...',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-          color: Colors.black45,
-          fontSize: 18,
-        )),
-      ),
-    );
+    return Center(
+        child: CircularProgressIndicator(
+      color: primary,
+    ));
   }
 
   Widget contentNotDownloaded() {
@@ -97,7 +90,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
             color: Colors.black45,
             fontSize: 18,
           ))),
-      subtitle: Text("20.5 Celsius",
+      subtitle: Text("20.5 C",
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
             color: Colors.black45,
@@ -112,7 +105,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     return IconButton(
       icon: Icon(
         Icons.refresh_rounded,
-        color: Colors.black45,
+        color: primary,
       ),
       onPressed: queryWeather,
     );
@@ -124,7 +117,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       case "Clouds":
         return Icon(
           Icons.cloud,
-          color: Colors.white,
+          color: primary,
         );
         break;
       case "Wind":
@@ -133,12 +126,12 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       case "Clear":
         return Icon(
           Icons.wb_sunny,
-          color: Colors.white,
+          color: primary,
         );
       case "Rain":
-        return Text("pioggia");
+        return Text("Rain");
       case "Clouds":
-        return Text("neve");
+        return Text("Clouds");
         break;
       default:
         return Text("?");

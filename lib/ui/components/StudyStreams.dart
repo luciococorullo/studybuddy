@@ -14,6 +14,7 @@ class StudyStreams extends StatelessWidget {
         decoration: BoxDecoration(
             color: glass, borderRadius: BorderRadius.circular(10)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "StudyStream",
@@ -30,7 +31,7 @@ class StudyStreams extends StatelessWidget {
                   flex: 2,
                 ),
                 RoomButton(
-                  title: "Stanza 1",
+                  title: "Room One",
                   link:
                       "https://us02web.zoom.us/j/85994060850?pwd=OGU0Zzgwb3NCZ2FpT0E4SU9uSHNWdz09",
                 ),
@@ -38,7 +39,7 @@ class StudyStreams extends StatelessWidget {
                   flex: 1,
                 ),
                 RoomButton(
-                  title: "Stanza 2",
+                  title: "Room Two",
                   link:
                       "https://us02web.zoom.us/j/85897513021?pwd=RGFIZGFCaFdUUUMyV0xGK1JiaUlUZz09",
                 ),
@@ -46,6 +47,14 @@ class StudyStreams extends StatelessWidget {
                   flex: 2,
                 ),
               ],
+            ),
+            Spacer(
+              flex: 1,
+            ),
+            Text(
+              "Rooms are provided by studystream.live",
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(color: Colors.black45, fontSize: 11)),
             ),
           ],
         ));
@@ -60,15 +69,16 @@ class RoomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 35,
       width: 90,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: primary),
+          color: primary, borderRadius: BorderRadius.circular(10)),
       child: Center(
         child: TextButton(
             child: Text(
               title,
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(color: glass, fontSize: 12)),
             ),
             onPressed: () => html.window.open(link, "_blank")),
       ),

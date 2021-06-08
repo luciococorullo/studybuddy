@@ -131,6 +131,7 @@ class _CustomCountDownState extends State<CustomCountDown> {
                   widget.controller.pause();
                   setState(() {
                     running = false;
+                    i = 0;
                   });
                 })
           ],
