@@ -39,7 +39,6 @@ class Sidebar extends StatelessWidget {
             Spacer(
               flex: 10,
             ),
-            LoginButton(),
             LogoutButton(),
             InfoVersion(version: 0.1),
           ],

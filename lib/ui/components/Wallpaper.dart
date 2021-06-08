@@ -107,12 +107,3 @@ String convertToMinutesSeconds(Duration duration) {
       seconds < 10 ? '0${seconds % 60}' : (seconds % 60).toString();
   return '$parsedMinutes:$parsedSeconds';
 }
-
-IconData animatedVolumeIcon(double volume) {
-  if (volume == 0)
-    return Icons.volume_mute;
-  else if (volume < 0.5)
-    return Icons.volume_down;
-  else
-    return Icons.volume_up;
-}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studybuddy/models/auth.dart';
 import 'package:studybuddy/ui/pages/AuthDialog.dart';
 
+//TODO: da cancellare
 class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
