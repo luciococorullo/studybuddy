@@ -41,131 +41,11 @@ class _TimerState extends State<Timer> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // visualizza il timer in base alla richiesta
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            info == 0
-                ? Countdown(
-                    controller: _controller1,
-                    seconds: 1500,
-                    build: (_, double time) {
-                      final String minutesStr =
-                          ((time / 60) % 60).floor().toString().padLeft(2, '0');
-                      final String secondsStr =
-                          (time % 60).floor().toString().padLeft(2, '0');
-                      return Text(
-                        '$minutesStr:$secondsStr',
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 50,
-                        )),
-                      );
-                    },
-                    interval: Duration(milliseconds: 100),
-                    onFinished: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Timer is done!'),
-                        ),
-                      );
-                    },
-                  )
-                : info == 1
-                    ? Countdown(
-                        controller: _controller2,
-                        seconds: 300,
-                        build: (_, double time) {
-                          final String minutesStr = ((time / 60) % 60)
-                              .floor()
-                              .toString()
-                              .padLeft(2, '0');
-                          final String secondsStr =
-                              (time % 60).floor().toString().padLeft(2, '0');
-                          return Text(
-                            '$minutesStr:$secondsStr',
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 50,
-                            )),
-                          );
-                        },
-                        interval: Duration(milliseconds: 100),
-                        onFinished: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Timer is done!'),
-                            ),
-                          );
-                        },
-                      )
-                    : Countdown(
-                        controller: _controller3,
-                        seconds: 900,
-                        build: (_, double time) {
-                          final String minutesStr = ((time / 60) % 60)
-                              .floor()
-                              .toString()
-                              .padLeft(2, '0');
-                          final String secondsStr =
-                              (time % 60).floor().toString().padLeft(2, '0');
-                          return Text(
-                            '$minutesStr:$secondsStr',
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 50,
-                            )),
-                          );
-                        },
-                        interval: Duration(milliseconds: 100),
-                        onFinished: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Timer is done!'),
-                            ),
-                          );
-                        },
-                      ),
-            // cambia il bottone in base allo stato del timer
-            !running
-                ? TextButton(
-                    child: Text("Start",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Colors.black45, fontSize: 18))),
-                    onPressed: () {
-                      _controller1.start();
-                      setState(() {
-                        running = true;
-                      });
-                    })
-                : TextButton(
-                    child: Text("Pause",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Colors.black45, fontSize: 18))),
-                    onPressed: () {
-                      _controller1.pause();
-                      setState(() {
-                        running = false;
-                      });
-                    }),
-            running
-                ? IconButton(
-                    icon: Icon(Icons.refresh_rounded),
-                    color: primary,
-                    onPressed: () {
-                      _controller1.restart();
-                      _controller1.pause();
-                      setState(() {
-                        running = false;
-                      });
-                    })
-                : Container(),
-          ],
-        ),
+        info == 0
+            ? CustomCountDown(seconds: 1500)
+            : info == 1
+                ? CustomCountDown(seconds: 300)
+                : CustomCountDown(seconds: 900),
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -279,21 +159,100 @@ class _TimerState extends State<Timer> {
   }
 }
 
-/* class CustomCountDown extends StatefulWidget {
-  const CustomCountDown({ Key key }) : super(key: key);
+class CustomCountDown extends StatefulWidget {
+  final int seconds;
+  CustomCountDown({Key key, this.seconds}) : super(key: key);
 
   @override
   _CustomCountDownState createState() => _CustomCountDownState();
 }
 
 class _CustomCountDownState extends State<CustomCountDown> {
+  final CountdownController _controller = new CountdownController();
+  bool running = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Row(
+      children: [
+        Countdown(
+          controller: _controller,
+          seconds: widget.seconds,
+          build: (_, double time) {
+            final String minutesStr =
+                ((time / 60) % 60).floor().toString().padLeft(2, '0');
+            final String secondsStr =
+                (time % 60).floor().toString().padLeft(2, '0');
+            return Text(
+              '$minutesStr:$secondsStr',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                color: Colors.black87,
+                fontSize: 50,
+              )),
+            );
+          },
+          interval: Duration(milliseconds: 100),
+          onFinished: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Timer is done!'),
+              ),
+            );
+          },
+        ),
+        !running
+            ? TextButton(
+                child: Text("Start",
+                    style: GoogleFonts.montserrat(
+                        textStyle:
+                            TextStyle(color: Colors.black45, fontSize: 18))),
+                onPressed: () {
+                  _controller.start();
+                  setState(() {
+                    running = true;
+                  });
+                })
+            : TextButton(
+                child: Text("Pause",
+                    style: GoogleFonts.montserrat(
+                        textStyle:
+                            TextStyle(color: Colors.black45, fontSize: 18))),
+                onPressed: () {
+                  _controller.pause();
+                  setState(() {
+                    running = false;
+                  });
+                }),
+        running
+            ? IconButton(
+                icon: Icon(Icons.refresh_rounded),
+                color: primary,
+                onPressed: () {
+                  _controller.restart();
+                  _controller.pause();
+                  setState(() {
+                    running = false;
+                  });
+                })
+            : Container(),
+      ],
     );
   }
-} */
+}
+
+class CountDownButton extends StatefulWidget {
+  const CountDownButton({Key key}) : super(key: key);
+
+  @override
+  _CountDownButtonState createState() => _CountDownButtonState();
+}
+
+class _CountDownButtonState extends State<CountDownButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 /* 
 class Timer extends StatefulWidget {
   @override
