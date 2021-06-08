@@ -22,12 +22,6 @@ class _NoteCardState extends State<NoteCard> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.note.title,
-            style: GoogleFonts.montserrat(
-                textStyle:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
           Text(widget.note.description,
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 14),
@@ -47,7 +41,7 @@ class _NoteCardState extends State<NoteCard> {
                       color: Colors.white,
                     ),
                     onPressed: () => print(
-                        "Edit button pressed on note ${widget.note.title}")),
+                        "Edit button pressed on note ${widget.note.description}")),
               )
             ],
           )
@@ -57,20 +51,20 @@ class _NoteCardState extends State<NoteCard> {
   }
 }
 
-Widget getType(Type type) {
+Widget getType(String type) {
   String state;
   Color color;
 
   switch (type) {
-    case Type.DOING:
+    case "doing":
       state = "Doing";
       color = Colors.orange;
       break;
-    case Type.DONE:
+    case "done":
       state = "Done";
       color = Colors.green;
       break;
-    case Type.TODO:
+    case "todo":
       state = "Todo";
       color = Colors.red;
       break;

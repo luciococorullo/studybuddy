@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:studybuddy/models/api.dart';
+
+import 'Note.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -9,19 +11,6 @@ String uid;
 String userEmail;
 String name;
 String imageUrl;
-
-Future anonymousAuth() async {
-  try {
-    UserCredential result = await auth.signInAnonymously();
-    print(result);
-    User user = result.user;
-    print(user);
-    return user;
-  } catch (error) {
-    print(error.toString());
-    return null;
-  }
-}
 
 Future<User> registerWithEmailPassword(String email, String password) async {
   // Initialize Firebase
@@ -42,6 +31,7 @@ Future<User> registerWithEmailPassword(String email, String password) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('auth', true);
     }
+    await Api(uid: uid).updateUserData(userEmail);
   } catch (e) {
     print(e);
   }
@@ -110,6 +100,7 @@ Future<User> signInWithGoogle() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('auth', true);
   }
+  await Api(uid: uid).updateUserData(userEmail);
 
   return user;
 }
@@ -130,8 +121,6 @@ void signOutGoogle() async {
 }
 
 Future getUser() async {
-  // Initialize Firebase
-
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool authSignedIn = prefs.getBool('auth') ?? false;
 
