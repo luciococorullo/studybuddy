@@ -40,6 +40,7 @@ class _TimerState extends State<Timer> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        // visualizza il timer in base alla richiesta
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -127,7 +128,7 @@ class _TimerState extends State<Timer> {
                           );
                         },
                       ),
-            // botton
+            // cambia il bottone in base allo stato del timer
             !running
                 ? TextButton(
                     child: Text("Start",
@@ -174,47 +175,102 @@ class _TimerState extends State<Timer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    //border: Border.all(width: 1),
-                    ),
-                child: TextButton(
-                    child: Text("Pomodoro",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Colors.black45, fontSize: 12))),
-                    onPressed: () {
-                      _controller1.restart();
-                      _controller1.pause();
-                      setState(() {
-                        info = 0;
-                      });
-                    }),
-              ),
-              TextButton(
-                  child: Text("Short Pause",
-                      style: GoogleFonts.montserrat(
-                          textStyle:
-                              TextStyle(color: Colors.black45, fontSize: 12))),
-                  onPressed: () {
-                    setState(() {
-                      _controller1.restart();
-                      _controller1.pause();
-                      info = 1;
-                    });
-                  }),
-              TextButton(
-                  child: Text("Long Pause",
-                      style: GoogleFonts.montserrat(
-                          textStyle:
-                              TextStyle(color: Colors.black45, fontSize: 12))),
-                  onPressed: () {
-                    _controller1.restart();
-                    _controller1.pause();
-                    setState(() {
-                      info = 3;
-                    });
-                  }),
+              info == 0
+                  ? Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 2.0, color: primary),
+                        ),
+                      ),
+                      child: TextButton(
+                          child: Text("Pomodoro",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.black45, fontSize: 12))),
+                          onPressed: () {
+                            setState(() {
+                              _controller1.restart();
+                              _controller1.pause();
+                              info = 0;
+                            });
+                          }),
+                    )
+                  : TextButton(
+                      child: Text("Pomodoro",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.black45, fontSize: 12))),
+                      onPressed: () {
+                        setState(() {
+                          _controller1.restart();
+                          _controller1.pause();
+                          info = 0;
+                        });
+                      }),
+              info == 1
+                  ? Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 2.0, color: primary),
+                        ),
+                      ),
+                      child: TextButton(
+                          child: Text("Short Break",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.black45, fontSize: 12))),
+                          onPressed: () {
+                            setState(() {
+                              _controller1.restart();
+                              _controller1.pause();
+                              info = 1;
+                            });
+                          }),
+                    )
+                  : TextButton(
+                      child: Text("Short Break",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.black45, fontSize: 12))),
+                      onPressed: () {
+                        setState(() {
+                          _controller1.restart();
+                          _controller1.pause();
+                          info = 1;
+                        });
+                      }),
+              info == 3
+                  ? Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 2.0, color: primary),
+                        ),
+                      ),
+                      child: TextButton(
+                          child: Text("Long Break",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.black45, fontSize: 12))),
+                          onPressed: () {
+                            setState(() {
+                              _controller1.restart();
+                              _controller1.pause();
+                              info = 3;
+                            });
+                          }),
+                    )
+                  : TextButton(
+                      child: Text("Long Break",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.black45, fontSize: 12))),
+                      onPressed: () {
+                        setState(() {
+                          _controller1.restart();
+                          _controller1.pause();
+                          info = 3;
+                        });
+                      }),
             ],
           ),
         ),
@@ -223,7 +279,21 @@ class _TimerState extends State<Timer> {
   }
 }
 
-void chooseButton() {}
+/* class CustomCountDown extends StatefulWidget {
+  const CustomCountDown({ Key key }) : super(key: key);
+
+  @override
+  _CustomCountDownState createState() => _CustomCountDownState();
+}
+
+class _CustomCountDownState extends State<CustomCountDown> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+  }
+} */
 /* 
 class Timer extends StatefulWidget {
   @override
