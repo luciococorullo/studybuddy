@@ -30,11 +30,11 @@ class Sidebar extends StatelessWidget {
             Spacer(flex: 1),
             Profile(),
             Spacer(flex: 1),
-            WeatherWidget(),
-            Spacer(flex: 1),
             TimerContainer(),
             Spacer(flex: 1),
             StudyStreams(),
+            Spacer(flex: 1),
+            WeatherWidget(),
             //TODO: agg widgets
             Spacer(
               flex: 10,

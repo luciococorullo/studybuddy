@@ -28,12 +28,11 @@ class Timer extends StatefulWidget {
 
 class _TimerState extends State<Timer> {
   // Controller
-  final CountdownController _controller1 = new CountdownController();
-  final CountdownController _controller2 = new CountdownController();
-  final CountdownController _controller3 = new CountdownController();
+  final CountdownController controllerPomodoro = new CountdownController();
+  final CountdownController controllerShort = new CountdownController();
   bool running = false;
-  int info = 0;
-
+  int duration = 1500;
+  bool pomodoro = true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,119 +40,15 @@ class _TimerState extends State<Timer> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // visualizza il timer in base alla richiesta
-        info == 0
-            ? CustomCountDown(seconds: 1500)
-            : info == 1
-                ? CustomCountDown(seconds: 300)
-                : CustomCountDown(seconds: 900),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
-
-          //TODO: le voci del menu
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              info == 0
-                  ? Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(width: 2.0, color: primary),
-                        ),
-                      ),
-                      child: TextButton(
-                          child: Text("Pomodoro",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                      color: Colors.black45, fontSize: 12))),
-                          onPressed: () {
-                            setState(() {
-                              _controller1.restart();
-                              _controller1.pause();
-                              info = 0;
-                            });
-                          }),
-                    )
-                  : TextButton(
-                      child: Text("Pomodoro",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.black45, fontSize: 12))),
-                      onPressed: () {
-                        setState(() {
-                          _controller1.restart();
-                          _controller1.pause();
-                          info = 0;
-                        });
-                      }),
-              info == 1
-                  ? Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(width: 2.0, color: primary),
-                        ),
-                      ),
-                      child: TextButton(
-                          child: Text("Short Break",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                      color: Colors.black45, fontSize: 12))),
-                          onPressed: () {
-                            setState(() {
-                              _controller1.restart();
-                              _controller1.pause();
-                              info = 1;
-                            });
-                          }),
-                    )
-                  : TextButton(
-                      child: Text("Short Break",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.black45, fontSize: 12))),
-                      onPressed: () {
-                        setState(() {
-                          _controller1.restart();
-                          _controller1.pause();
-                          info = 1;
-                        });
-                      }),
-              info == 3
-                  ? Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(width: 2.0, color: primary),
-                        ),
-                      ),
-                      child: TextButton(
-                          child: Text("Long Break",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                      color: Colors.black45, fontSize: 12))),
-                          onPressed: () {
-                            setState(() {
-                              _controller1.restart();
-                              _controller1.pause();
-                              info = 3;
-                            });
-                          }),
-                    )
-                  : TextButton(
-                      child: Text("Long Break",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.black45, fontSize: 12))),
-                      onPressed: () {
-                        setState(() {
-                          _controller1.restart();
-                          _controller1.pause();
-                          info = 3;
-                        });
-                      }),
-            ],
-          ),
-        ),
+        pomodoro
+            ? CustomCountDown(
+                seconds: 1500,
+                controller: controllerPomodoro,
+              )
+            : CustomCountDown(
+                seconds: 300,
+                controller: controllerShort,
+              ),
       ],
     );
   }
@@ -161,344 +56,115 @@ class _TimerState extends State<Timer> {
 
 class CustomCountDown extends StatefulWidget {
   final int seconds;
-  CustomCountDown({Key key, this.seconds}) : super(key: key);
+  final CountdownController controller;
+  CustomCountDown({Key key, this.seconds, this.controller}) : super(key: key);
 
   @override
   _CustomCountDownState createState() => _CustomCountDownState();
 }
 
 class _CustomCountDownState extends State<CustomCountDown> {
-  final CountdownController _controller = new CountdownController();
   bool running = false;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Countdown(
-          controller: _controller,
-          seconds: widget.seconds,
-          build: (_, double time) {
-            final String minutesStr =
-                ((time / 60) % 60).floor().toString().padLeft(2, '0');
-            final String secondsStr =
-                (time % 60).floor().toString().padLeft(2, '0');
-            return Text(
-              '$minutesStr:$secondsStr',
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                color: Colors.black87,
-                fontSize: 50,
-              )),
-            );
-          },
-          interval: Duration(milliseconds: 100),
-          onFinished: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Timer is done!'),
-              ),
-            );
-          },
-        ),
-        !running
-            ? TextButton(
-                child: Text("Start",
-                    style: GoogleFonts.montserrat(
-                        textStyle:
-                            TextStyle(color: Colors.black45, fontSize: 18))),
-                onPressed: () {
-                  _controller.start();
-                  setState(() {
-                    running = true;
-                  });
-                })
-            : TextButton(
-                child: Text("Pause",
-                    style: GoogleFonts.montserrat(
-                        textStyle:
-                            TextStyle(color: Colors.black45, fontSize: 18))),
-                onPressed: () {
-                  _controller.pause();
-                  setState(() {
-                    running = false;
-                  });
-                }),
-        running
-            ? IconButton(
-                icon: Icon(Icons.refresh_rounded),
-                color: primary,
-                onPressed: () {
-                  _controller.restart();
-                  _controller.pause();
-                  setState(() {
-                    running = false;
-                  });
-                })
-            : Container(),
-      ],
-    );
-  }
-}
-
-class CountDownButton extends StatefulWidget {
-  const CountDownButton({Key key}) : super(key: key);
-
-  @override
-  _CountDownButtonState createState() => _CountDownButtonState();
-}
-
-class _CountDownButtonState extends State<CountDownButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-/* 
-class Timer extends StatefulWidget {
-  @override
-  _TimerState createState() => _TimerState();
-}
-
-class _TimerState extends State<Timer> {
+  bool pomodoro = true;
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         Text(
-          "Pomodoro",
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(
-            color: Colors.black45,
-            fontSize: 18,
-          )),
-        ), 
-        Spacer(),
-        change_timer
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocBuilder<TimerBloc, TimerState>(
-                    //TimerBloc timer;
-                    builder: (context, state) {
-                      final String minutesStr = ((state.duration / 60) % 60)
-                          .floor()
-                          .toString()
-                          .padLeft(2, '0');
-                      final String secondsStr = (state.duration % 60)
-                          .floor()
-                          .toString()
-                          .padLeft(2, '0');
-                      return Text(
-                        '$minutesStr:$secondsStr',
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 50,
-                        )),
-                      );
-                    },
-                  ),
-                  BlocBuilder<TimerBloc, TimerState>(
-                    buildWhen: (previousState, state) =>
-                        state.runtimeType != previousState.runtimeType,
-                    builder: (context, state) => Actions(),
-                  ),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocBuilder<TimerBlocShortPause, TimerState>(
-                    //TimerBloc timer;
-                    builder: (context, state) {
-                      final String minutesStr = ((state.duration / 60) % 60)
-                          .floor()
-                          .toString()
-                          .padLeft(2, '0');
-                      final String secondsStr = (state.duration % 60)
-                          .floor()
-                          .toString()
-                          .padLeft(2, '0');
-                      return Text(
-                        '$minutesStr:$secondsStr',
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 50,
-                        )),
-                      );
-                    },
-                  ),
-                  BlocBuilder<TimerBloc, TimerState>(
-                    buildWhen: (previousState, state) =>
-                        state.runtimeType != previousState.runtimeType,
-                    builder: (context, state) => Actions(),
-                  ),
-                ],
-              ),
-        Spacer(
-          flex: 2,
-        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
-                child: Text("Pomodoro",
-                    style: GoogleFonts.montserrat(
-                        textStyle:
-                            TextStyle(color: Colors.black45, fontSize: 16))),
+            Countdown(
+              controller: widget.controller,
+              seconds: pomodoro ? 1500 : 300,
+              build: (BuildContext context, double time) {
+                final String minutesStr =
+                    ((time / 60) % 60).floor().toString().padLeft(2, '0');
+                final String secondsStr =
+                    (time % 60).floor().toString().padLeft(2, '0');
+                return Text(
+                  '$minutesStr:$secondsStr',
+                  style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 50,
+                  )),
+                );
+              },
+              interval: Duration(milliseconds: 100),
+              onFinished: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Timer is done!'),
+                  ),
+                );
+              },
+            ),
+            !running
+                ? IconButton(
+                    icon: Icon(
+                      Icons.play_arrow,
+                      color: primary,
+                    ),
+                    onPressed: () {
+                      widget.controller.start();
+                      setState(() {
+                        running = true;
+                      });
+                    })
+                : IconButton(
+                    icon: Icon(
+                      Icons.pause,
+                      color: primary,
+                    ),
+                    onPressed: () {
+                      widget.controller.pause();
+                      setState(() {
+                        running = false;
+                      });
+                    }),
+            IconButton(
+                icon: Icon(Icons.refresh_rounded),
+                color: primary,
                 onPressed: () {
+                  widget.controller.restart();
+                  widget.controller.pause();
                   setState(() {
-                    change_timer = false;
+                    running = false;
                   });
-                }),
-            TextButton(
-                child: Text("Short Pause",
-                    style: GoogleFonts.montserrat(
-                        textStyle:
-                            TextStyle(color: Colors.black45, fontSize: 16))),
-                onPressed: () {
-                  setState(() {
-                    change_timer = true;
-                  });
-                }),
-            TextButton(
-                child: Text("Long Pause",
-                    style: GoogleFonts.montserrat(
-                        textStyle:
-                            TextStyle(color: Colors.black45, fontSize: 16))),
-                onPressed: () {}),
+                })
           ],
         ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(width: 2.0, color: primary),
+            ),
+          ),
+          child: TextButton(
+            onPressed: () {
+              widget.controller.restart();
+              widget.controller.pause();
+              setState(() {
+                running = false;
+                pomodoro = !pomodoro;
+                i++;
+              });
+            },
+            child: Text(
+              i == 0
+                  ? "Switch to Break"
+                  : i == 1
+                      ? "Press again"
+                      : pomodoro
+                          ? "Switch to Pomodoro"
+                          : "Switch to Break",
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(color: Colors.black45, fontSize: 12)),
+            ),
+          ),
+        )
       ],
     );
   }
 }
-
-class Actions extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ButtonBar(
-      alignment: MainAxisAlignment.center,
-      children: _mapStateToActionButtons(
-          timerBloc: BlocProvider.of<TimerBloc>(context)),
-    );
-  }
-
-  List<Widget> _mapStateToActionButtons({TimerBloc timerBloc}) {
-    final TimerState currentState = timerBloc.state;
-    if (currentState is TimerInitial) {
-      return [
-        TextButton(
-            child: Text("Start",
-                style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(color: Colors.black45, fontSize: 18))),
-            onPressed: () =>
-                timerBloc.add(TimerStarted(duration: currentState.duration))),
-      ];
-    }
-    if (currentState is TimerRunInProgress) {
-      return [
-        TextButton(
-          child: Text("Pause",
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.black45, fontSize: 18))),
-          onPressed: () => timerBloc.add(TimerPaused()),
-        ),
-        Divider(),
-        IconButton(
-          icon: Icon(Icons.restart_alt_outlined),
-          color: primary,
-          onPressed: () => timerBloc.add(TimerReset()),
-        ),
-      ];
-    }
-    if (currentState is TimerRunPause) {
-      return [
-        TextButton(
-          child: Text("Play",
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.black45, fontSize: 18))),
-          onPressed: () => timerBloc.add(TimerResumed()),
-        ),
-        IconButton(
-          icon: Icon(Icons.restart_alt_outlined),
-          color: primary,
-          onPressed: () => timerBloc.add(TimerReset()),
-        ),
-      ];
-    }
-    if (currentState is TimerRunComplete) {
-      return [
-        TextButton(
-          child: Icon(Icons.replay),
-          onPressed: () => timerBloc.add(TimerReset()),
-        ),
-      ];
-    }
-    return [];
-  }
-} 
- */
-/* 
-class Buttons extends StatefulWidget {
-  @override
-  _ButtonsState createState() => _ButtonsState();
-}
-
-class _ButtonsState extends State<Buttons> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(
-            flex: 2,
-          ),
-          TextButton(
-            onPressed: () {
-              print("Pomodoro pressed");
-              setState(() {
-                pom = true;
-              });
-            },
-            child: Text("Pomodoro",
-                style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 18,
-                        decoration: TextDecoration.underline))),
-          ),
-          Spacer(
-            flex: 1,
-          ),
-          TextButton(
-            onPressed: () {
-              print("Break pressed");
-              setState(() {
-                pom = false;
-              });
-            },
-            child: Text("Break",
-                style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 18,
-                        decoration: TextDecoration.underline))),
-          ),
-          Spacer(
-            flex: 2,
-          )
-        ],
-      ),
-    );
-  }
-} 
- */
