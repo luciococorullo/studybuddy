@@ -64,7 +64,7 @@ Widget getType(String type) {
       state = "Done";
       color = Colors.green;
       break;
-    case "todo":
+    case "to-do":
       state = "Todo";
       color = Colors.red;
       break;

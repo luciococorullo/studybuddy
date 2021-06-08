@@ -11,7 +11,7 @@ class Api {
   Future updateUserData(String email) async {
     Note note = Note(
         description: "Benvenuto!\nAggiungi altre note come questa",
-        state: "todo");
+        state: "starting");
 
     return await utentiCollection.doc(uid).set({
       'email': email,
@@ -22,7 +22,12 @@ class Api {
   }
 
   Future addNote(Note note) async {
-    return await utentiCollection.doc(uid).set({'notes': note});
+    print(uid);
+    return await utentiCollection.doc(uid).update({
+      'notes': FieldValue.arrayUnion([
+        {'description': note.description, 'state': note.state}
+      ])
+    });
   }
 
   Future removeNote(Note note) async {

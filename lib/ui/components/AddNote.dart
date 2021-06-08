@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/models/Note.dart';
 import 'package:studybuddy/shared/costants.dart';
-
-import 'NoteCard.dart';
+import 'package:studybuddy/ui/pages/AddNoteDialog.dart';
 
 class AddNote extends StatefulWidget {
   final Note note;
@@ -35,7 +34,12 @@ class _AddNoteState extends State<AddNote> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50), color: secondary),
                 child: IconButton(
-                    onPressed: () => print("new note"),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AddNoteDialog(),
+                      );
+                    },
                     icon: Icon(
                       Icons.add,
                       color: Colors.black45,
