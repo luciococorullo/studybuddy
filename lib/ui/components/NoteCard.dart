@@ -43,7 +43,9 @@ class _NoteCardState extends State<NoteCard> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => EditNoteDialog(),
+                      builder: (context) => EditNoteDialog(
+                        note: widget.note,
+                      ),
                     );
                   },
                 ),

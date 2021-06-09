@@ -9,6 +9,8 @@ import 'package:studybuddy/ui/components/NotesBoard.dart';
 import 'Homepage.dart';
 
 class EditNoteDialog extends StatefulWidget {
+  final Note note;
+  EditNoteDialog({@required this.note});
   @override
   _EditNoteDialogState createState() => _EditNoteDialogState();
 }
@@ -53,7 +55,12 @@ class _EditNoteDialogState extends State<EditNoteDialog> {
                     child: TextButton(
                         onPressed: () {
                           print(noteText + noteState);
-                          // Todo: add func
+                          try {
+                            print("Preso uid: " + uid);
+                            Api(uid: uid).removeNote(widget.note);
+                          } catch (e) {
+                            print(e.toString());
+                          }
                           Navigator.of(context).pop();
 
                           Navigator.of(context).push(MaterialPageRoute(
@@ -134,22 +141,25 @@ class _EditNoteDialogState extends State<EditNoteDialog> {
                       color: primary, borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: TextButton(
-                        onPressed: () {
-                          print(noteText + noteState);
-                          Note newNote = new Note(
-                              description: noteText,
-                              state: noteState.toLowerCase());
-                          print(newNote.description + newNote.state);
+                        onPressed: () async {
+                          noteText == ""
+                              ? noteText = widget.note.description
+                              : null;
                           try {
                             print("Preso uid: " + uid);
-                            Api(uid: uid).addNote(newNote);
+                            Api(uid: uid).updateNote(
+                                widget.note,
+                                new Note(
+                                    description:
+                                        noteText ?? widget.note.description,
+                                    state: noteState.toLowerCase()));
                           } catch (e) {
                             print(e.toString());
                           }
-                          Navigator.of(context).pop();
 
+                          await Future.delayed(Duration(seconds: 1));
+                          Navigator.of(context).pop();
                           Navigator.of(context).push(MaterialPageRoute(
-                            fullscreenDialog: true,
                             builder: (context) => Homepage(),
                           ));
                         },

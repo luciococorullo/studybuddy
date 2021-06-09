@@ -28,15 +28,32 @@ class Api {
     });
   }
 
+//TODO:non funziona
   Future removeNote(Note note) async {
-    var val = [];
-    val.add(note.description);
-    return await utentiCollection
-        .doc(uid)
-        .update({'notes': FieldValue.arrayRemove(val)});
+    try {
+      print(utentiCollection.doc(uid).get().toString());
+      return await utentiCollection.doc(uid).update({
+        'notes': FieldValue.arrayRemove([
+          {'description': note.description, 'state': note.state}
+        ])
+      });
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
-  Future updateNote(Note note) async {
-    return await utentiCollection.doc(uid).update({'notes': note});
+  Future updateNote(Note oldNote, Note newNote) async {
+    try {
+      await removeNote(oldNote);
+      return await utentiCollection.doc(uid).update({
+        'notes': FieldValue.arrayUnion([
+          {'description': newNote.description, 'state': newNote.state}
+        ])
+      });
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
