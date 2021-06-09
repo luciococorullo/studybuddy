@@ -8,12 +8,12 @@ import 'package:studybuddy/ui/components/NotesBoard.dart';
 
 import 'Homepage.dart';
 
-class AddNoteDialog extends StatefulWidget {
+class EditNoteDialog extends StatefulWidget {
   @override
-  _AddNoteDialogState createState() => _AddNoteDialogState();
+  _EditNoteDialogState createState() => _EditNoteDialogState();
 }
 
-class _AddNoteDialogState extends State<AddNoteDialog> {
+class _EditNoteDialogState extends State<EditNoteDialog> {
   TextEditingController textNoteController;
 
   String noteState = "To-Do";
@@ -31,14 +31,45 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Add new note ",
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
-                    color: Colors.black45,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-              ),
+            Row(
+              children: [
+                Text(
+                  "Edit note ",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  height: 35,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade300,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: TextButton(
+                        onPressed: () {
+                          print(noteText + noteState);
+                          // Todo: add func
+                          Navigator.of(context).pop();
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) => Homepage(),
+                          ));
+                        },
+                        child: Text(
+                          "Delete",
+                          style: GoogleFonts.montserrat(
+                              textStyle:
+                                  TextStyle(color: Colors.white, fontSize: 12)),
+                        )),
+                  ),
+                ),
+              ],
             ),
             Spacer(flex: 1),
             TextField(
@@ -116,7 +147,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                             print(e.toString());
                           }
                           Navigator.of(context).pop();
-                          //TODO: trovare una situa migliore
+
                           Navigator.of(context).push(MaterialPageRoute(
                             fullscreenDialog: true,
                             builder: (context) => Homepage(),

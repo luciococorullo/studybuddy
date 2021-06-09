@@ -9,9 +9,7 @@ class Api {
       FirebaseFirestore.instance.collection('utenti');
 
   Future updateUserData(String email) async {
-    Note note = Note(
-        description: "Benvenuto!\nAggiungi altre note come questa",
-        state: "starting");
+    Note note = Note(description: " ", state: "Starting");
 
     return await utentiCollection.doc(uid).set({
       'email': email,

@@ -112,30 +112,10 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   }
 
   Widget weatherIcon(String condition) {
-    //TODO: implementare iconcine decenti
-    switch (condition) {
-      case "Clouds":
-        return Icon(
-          Icons.cloud,
-          color: primary,
-        );
-        break;
-      case "Wind":
-        return Text("vento");
-        break;
-      case "Clear":
-        return Icon(
-          Icons.wb_sunny,
-          color: primary,
-        );
-      case "Rain":
-        return Text("Rain");
-      case "Clouds":
-        return Text("Clouds");
-        break;
-      default:
-        return Text("?");
-    }
+    return Image.asset(
+      "assets/images/${condition.toLowerCase()}.png",
+      scale: 2,
+    );
   }
 
   Widget _resultView() => _state == AppState.FINISHED_DOWNLOADING

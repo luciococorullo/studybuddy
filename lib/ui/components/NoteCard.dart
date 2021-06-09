@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:studybuddy/models/Note.dart';
 import 'package:studybuddy/shared/costants.dart';
+import 'package:studybuddy/ui/pages/EditNoteDialog.dart';
 
 class NoteCard extends StatefulWidget {
   Note note;
@@ -24,7 +25,7 @@ class _NoteCardState extends State<NoteCard> {
         children: [
           Text(widget.note.description,
               style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 14),
+                textStyle: TextStyle(fontSize: 16, color: Colors.white),
               )),
           Spacer(),
           Row(
@@ -33,15 +34,19 @@ class _NoteCardState extends State<NoteCard> {
               getType(widget.note.state),
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.red),
+                    borderRadius: BorderRadius.circular(100), color: primary),
                 child: IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                    ),
-                    onPressed: () => print(
-                        "Edit button pressed on note ${widget.note.description}")),
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => EditNoteDialog(),
+                    );
+                  },
+                ),
               )
             ],
           )
@@ -58,26 +63,32 @@ Widget getType(String type) {
   switch (type) {
     case "doing":
       state = "Doing";
-      color = Colors.orange;
+      color = Colors.orange.shade300;
       break;
     case "done":
       state = "Done";
-      color = Colors.green;
+      color = Colors.green.shade300;
       break;
     case "to-do":
-      state = "Todo";
-      color = Colors.red;
+      state = "To-do";
+      color = Colors.red.shade300;
       break;
+    default:
+      state = " ";
+      color = glass;
   }
   return Container(
-    height: 20,
+    height: 25,
     width: 70,
     decoration:
-        BoxDecoration(color: color, borderRadius: BorderRadius.circular(50)),
-    child: Text(
-      state,
-      textAlign: TextAlign.center,
-      style: GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.white)),
+        BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+    child: Center(
+      child: Text(
+        state,
+        //textAlign: TextAlign.center,
+        style:
+            GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.white)),
+      ),
     ),
   );
 }

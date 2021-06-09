@@ -32,7 +32,7 @@ class _AddNoteState extends State<AddNote> {
               alignment: Alignment.center,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50), color: secondary),
+                    borderRadius: BorderRadius.circular(50), color: glass),
                 child: IconButton(
                     onPressed: () {
                       showDialog(

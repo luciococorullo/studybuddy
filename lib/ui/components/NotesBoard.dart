@@ -14,7 +14,7 @@ class NotesBoard extends StatelessWidget {
         ? Align(
             alignment: Alignment.topLeft,
             child: Container(
-              height: 700,
+              height: MediaQuery.of(context).size.height,
               width: 700,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -34,11 +34,11 @@ class NotesBoard extends StatelessWidget {
                             //TODO: quante note per colonna?
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4),
+                                    crossAxisCount: 3),
                             childrenDelegate: SliverChildListDelegate(
                               listNotes.map((Note note) {
                                 print(note.state);
-                                return note.state == "starting"
+                                return note.state == "Starting"
                                     ? AddNote(note: note)
                                     : NoteCard(
                                         note: note,
