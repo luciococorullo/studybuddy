@@ -53,7 +53,7 @@ class _EditNoteDialogState extends State<EditNoteDialog> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           print(noteText + noteState);
                           try {
                             print("Preso uid: " + uid);
@@ -61,8 +61,8 @@ class _EditNoteDialogState extends State<EditNoteDialog> {
                           } catch (e) {
                             print(e.toString());
                           }
+                          await Future.delayed(Duration(seconds: 1));
                           Navigator.of(context).pop();
-
                           Navigator.of(context).push(MaterialPageRoute(
                             fullscreenDialog: true,
                             builder: (context) => Homepage(),

@@ -103,7 +103,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                       color: primary, borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           print(noteText + noteState);
                           Note newNote = new Note(
                               description: noteText,
@@ -115,8 +115,9 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                           } catch (e) {
                             print(e.toString());
                           }
+                          await Future.delayed(Duration(seconds: 1));
+
                           Navigator.of(context).pop();
-                          //TODO: trovare una situa migliore
                           Navigator.of(context).push(MaterialPageRoute(
                             fullscreenDialog: true,
                             builder: (context) => Homepage(),
