@@ -1,15 +1,3 @@
 # Study-buddy
-![Header Image](.assets/images/readme/1.png)
-![Header Image](.assets/images/readme/2.png)
-![Header Image](.assets/images/readme/3.png)
-![Header Image](.assets/images/readme/4.png)
-![Header Image](.assets/images/readme/5.png)
-![Header Image](.assets/images/readme/6.png)
-![Header Image](.assets/images/readme/7.png)
-![Header Image](.assets/images/readme/8.png)
-![Header Image](.assets/images/readme/9.png)
-![Header Image](.assets/images/readme/10.png)
-![Header Image](.assets/images/readme/11.png)
-![Header Image](.assets/images/readme/12.png)
-![Header Image](.assets/images/readme/13.png)
-![Header Image](.assets/images/readme/14.png)
+![Header Image](./1.png)
+
