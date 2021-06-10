@@ -115,9 +115,10 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                           } catch (e) {
                             print(e.toString());
                           }
-                          await Future.delayed(Duration(seconds: 1));
+                          //await Future.delayed(Duration(seconds: 1));
 
                           Navigator.of(context).pop();
+
                           Navigator.of(context).push(MaterialPageRoute(
                             fullscreenDialog: true,
                             builder: (context) => Homepage(),

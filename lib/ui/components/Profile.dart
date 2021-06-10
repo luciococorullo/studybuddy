@@ -65,14 +65,11 @@ class Profile extends StatelessWidget {
                 trailing: CircleAvatar(
                   radius: 25,
                   backgroundColor: primary,
-                  backgroundImage:
-                      imageUrl != null ? NetworkImage(imageUrl) : null,
-                  child: imageUrl == null
-                      ? Image.asset(
+                  backgroundImage: imageUrl != null
+                      ? NetworkImage(imageUrl)
+                      : AssetImage(
                           'images/man.png',
-                          scale: 4,
-                        )
-                      : null,
+                        ),
                 ),
               ));
   }

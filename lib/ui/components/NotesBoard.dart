@@ -5,7 +5,12 @@ import 'package:studybuddy/models/auth.dart';
 import 'package:studybuddy/ui/components/AddNote.dart';
 import 'package:studybuddy/ui/components/NoteCard.dart';
 
-class NotesBoard extends StatelessWidget {
+class NotesBoard extends StatefulWidget {
+  @override
+  _NotesBoardState createState() => _NotesBoardState();
+}
+
+class _NotesBoardState extends State<NotesBoard> {
   final db = FirebaseFirestore.instance;
 
   @override
@@ -20,7 +25,7 @@ class NotesBoard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.transparent),
               child: StreamBuilder(
-                  stream: db.collection('utenti').doc(uid).get().asStream(),
+                  stream: refreshNotesBoard(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       List<Note> listNotes =
@@ -37,7 +42,6 @@ class NotesBoard extends StatelessWidget {
                                       crossAxisCount: 3),
                               childrenDelegate: SliverChildListDelegate(
                                 listNotes.map((Note note) {
-                                  print(note.state);
                                   return note.state == "Starting"
                                       ? AddNote(note: note)
                                       : NoteCard(
@@ -59,4 +63,12 @@ class NotesBoard extends StatelessWidget {
             ))
         : Container();
   }
+}
+
+Stream refreshNotesBoard() {
+  return FirebaseFirestore.instance
+      .collection('utenti')
+      .doc(uid)
+      .get()
+      .asStream();
 }

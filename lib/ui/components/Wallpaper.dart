@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:studybuddy/shared/costants.dart';
+import 'dart:html' as html;
 import 'package:studybuddy/ui/pages/Homepage.dart';
 import 'package:video_player/video_player.dart';
 
@@ -14,8 +15,10 @@ class _WallpaperState extends State<Wallpaper> {
   VideoPlayerController _controller;
 
   List<String> videos = [
+    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2FSwitzerland%20in%208K%20ULTRA%20HD%20HDR%20-%20Heaven%20of%20Earth%20(60%20FPS)_Trim.mp4?alt=media&token=ff0c95f6-4d0d-4ee9-84ef-b2501878090c',
     'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2Fprova.mp4?alt=media&token=033eeb35-98a3-4c22-a7cc-ae72bc89c53a',
-    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2F2.mp4?alt=media&token=1b11be1b-92bc-419a-ba4a-2cf7e06f3b43'
+    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2F2.mp4?alt=media&token=1b11be1b-92bc-419a-ba4a-2cf7e06f3b43',
+    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2Fooo.mp4?alt=media&token=6d81c615-bdcc-42f7-b2d8-724ce8a0591b'
   ];
 
   String selectedVideo;
@@ -23,7 +26,7 @@ class _WallpaperState extends State<Wallpaper> {
   @override
   void initState() {
     super.initState();
-    var rand = Random().nextInt(3);
+    var rand = Random().nextInt(4);
     selectedVideo = videos[rand];
     print(rand.toString());
 

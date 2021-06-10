@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studybuddy/ui/pages/Homepage.dart';
-import 'package:studybuddy/ui/pages/onboarfing.dart';
+import 'package:studybuddy/ui/onboard/OnBoard.dart';
 import 'models/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
