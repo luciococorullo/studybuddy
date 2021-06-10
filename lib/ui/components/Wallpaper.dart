@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:studybuddy/shared/costants.dart';
+import 'package:studybuddy/ui/pages/Homepage.dart';
 import 'package:video_player/video_player.dart';
 
 class Wallpaper extends StatefulWidget {
@@ -10,11 +13,21 @@ class Wallpaper extends StatefulWidget {
 class _WallpaperState extends State<Wallpaper> {
   VideoPlayerController _controller;
 
+  List<String> videos = [
+    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2Fprova.mp4?alt=media&token=033eeb35-98a3-4c22-a7cc-ae72bc89c53a',
+    'https://firebasestorage.googleapis.com/v0/b/studybuddy-parthenope.appspot.com/o/background%2F2.mp4?alt=media&token=1b11be1b-92bc-419a-ba4a-2cf7e06f3b43'
+  ];
+
+  String selectedVideo;
+
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        'https://firebasestorage.googleapis.com/v0/b/drunktry.appspot.com/o/1%20A.M%20Study%20Session%20%F0%9F%93%9A%20-%20%5Blofi%20hip%20hop%20chill%20beats%5D.mp4?alt=media&token=d763e652-b15c-4370-a976-fe8624e4ecfc')
+    var rand = Random().nextInt(3);
+    selectedVideo = videos[rand];
+    print(rand.toString());
+
+    _controller = VideoPlayerController.network(selectedVideo)
       ..addListener(() => setState(() {
             videoPosition = _controller.value.position;
           }))
@@ -31,7 +44,7 @@ class _WallpaperState extends State<Wallpaper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondary,
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -65,7 +78,7 @@ class _WallpaperState extends State<Wallpaper> {
             },
           ),
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           FloatingActionButton(
             backgroundColor: primary,
@@ -77,6 +90,23 @@ class _WallpaperState extends State<Wallpaper> {
                 _controller.value.volume > 0
                     ? _controller.setVolume(0.0)
                     : _controller.setVolume(0.5);
+              });
+            },
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(
+            backgroundColor: primary,
+            child: Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              setState(() {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Homepage(),
+                ));
               });
             },
           ),

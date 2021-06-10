@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studybuddy/ui/pages/Homepage.dart';
 import 'package:studybuddy/ui/pages/onboarfing.dart';
 import 'models/auth.dart';
-import 'ui/pages/Homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -45,7 +45,7 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return OnBoardingPage();
+          return uid == null ? OnBoardingPage() : Homepage();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete

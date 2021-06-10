@@ -11,12 +11,21 @@ class Api {
   Future updateUserData(String email) async {
     Note note = Note(description: " ", state: "Starting");
 
-    return await utentiCollection.doc(uid).set({
-      'email': email,
-      'notes': FieldValue.arrayUnion([
-        {'description': note.description, 'state': note.state}
-      ])
-    });
+    DocumentSnapshot ds = await utentiCollection.doc(uid).get();
+
+    return ds.exists
+        ? await utentiCollection.doc(uid).update({
+            'email': email,
+            'notes': FieldValue.arrayUnion([
+              {'description': note.description, 'state': note.state}
+            ])
+          })
+        : await utentiCollection.doc(uid).set({
+            'email': email,
+            'notes': FieldValue.arrayUnion([
+              {'description': note.description, 'state': note.state}
+            ])
+          });
   }
 
   Future addNote(Note note) async {
