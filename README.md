@@ -1,3 +1,14 @@
 # Study-buddy
-![Header Image](./1.png)
-
+![Presentation Image](./readme/1.jpg)
+![Presentation Image](./readme/2.jpg)
+![Presentation Image](./readme/3.jpg)
+![Presentation Image](./readme/4.jpg)
+![Presentation Image](./readme/5.jpg)
+![Presentation Image](./readme/6.jpg)
+![Presentation Image](./readme/7.jpg)
+![Presentation Image](./readme/8.jpg)
+![Presentation Image](./readme/9.jpg)
+![Presentation Image](./readme/10.jpg)
+![Presentation Image](./readme/11.jpg)
+![Presentation Image](./readme/12.jpg)
+![Presentation Image](./readme/13.jpg)
