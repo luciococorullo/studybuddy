@@ -13,7 +13,7 @@
 4. Create your own account logging in StudyBuddy.
 5. Enjoy.
 ## Developed by:
-- <a href="https://github.com/luciococorullo">@luciococorullo</a> - 0124001954
+- <a href="https://github.com/luciococorullo">@luciococorullo</a> - 0124001953
 - <a href="https://github.com/alessandrodauria">@alessandrodauria</a> - 0124001932
 
 # What is study buddy?
